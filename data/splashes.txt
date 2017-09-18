@@ -1,4 +1,24 @@
 Tut-turu!
+Oh, exploitable!
+Rust Evangelism Strikeforce!
+Rewrite it in Rust!
+Rewrite it in Go!
+Rewrite it in Python!
+Rewrite it in Haskell!
+Rewrite it in Lua!
+ZOMG TEH REI!
+I see what you did there!
+O RLY?
+OBEY
+By design!
+It’s Magic!
+Why so serious?
+Charlie don't surf!
+Yippie kay-yay!
+Hasta la vista, baby!
+Do a Barrel Roll!
+Use the source, Luke, use the source!
+Pwned!
 As seen on TV!
 Awesome!
 100% pure!
@@ -24,9 +44,9 @@ It's a game!
 Made in Sweden!
 Uses LWJGL!
 Reticulating splines!
-Minecraft!
 Yaaay!
 Singleplayer!
+Multyplayer!
 Keyboard compatible!
 Undocumented!
 Ingots!
@@ -172,8 +192,6 @@ Woo, facepunch!
 Woo, somethingawful!
 Woo, /v/!
 Woo, tigsource!
-Woo, minecraftforum!
-Woo, worldofminecraft!
 Woo, reddit!
 Woo, 2pp!
 Google anlyticsed!
@@ -204,7 +222,7 @@ Don't look directly at the bugs!
 Oh, ok, Pigmen!
 Finally with ladders!
 Scary!
-Play Minecraft, Watch Topgear, Get Pig!
+Watch Topgear, Get Pig!
 Twittered about!
 Jump up, jump up, and get down!
 Joel is neat!

@@ -1,15 +1,25 @@
-#!/usr/local/bin/python
+#!/usr/bin/env python
 # -*- coding: utf8 -*-
-
+"""
+    A lovely welcome script
+    version: 0.0.1
+    https://github.com/ninedraft/hello
+    author: ninedraft
+    license: MIT
+    Just put it on autostart of your terminal emulator.
+    Cats and sun is included!
+"""
 
 import random
 import time
-import requests
 import sys
 from os import path
 
+import requests
+
 if sys.version_info[0] < 3:
     raise Exception("Python 3 or a more recent version is required.")
+
 
 cats = [
     '''      \\    /\\
@@ -43,7 +53,7 @@ def rcat():
 
 def wquote():
     try:
-        with open(scriptdir() + "/wquotes.txt", mode='r', encoding="UTF8") as wquotes_file:
+        with open("/data/wquotes.txt", mode='r', encoding="UTF8") as wquotes_file:
             wq = random.choice(wquotes_file.readlines()).strip()
             return wq.replace("―", "\n\t―").replace("\\n", "\n")
     except:
@@ -65,7 +75,7 @@ def scriptdir():
 
 def splash():
     try:
-        with open(scriptdir() + "/splashes.txt", mode='r', encoding="UTF8") as splashes_file:
+        with open(scriptdir() + "/data/splashes.txt", mode='r', encoding="UTF8") as splashes_file:
             return random.choice(splashes_file.readlines()).strip()
     except:
         return "Unable to get splash text: " + str(sys.exc_info()[0])
