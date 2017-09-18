@@ -7,7 +7,7 @@
     author: ninedraft
     license: MIT
     Just put it on autostart of your terminal emulator.
-    Cats and sun is included!
+    Cats and sun are included!
 """
 
 import random
