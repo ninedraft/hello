@@ -53,7 +53,7 @@ def rcat():
 
 def wquote():
     try:
-        with open("/data/wquotes.txt", mode='r', encoding="UTF8") as wquotes_file:
+        with open(scriptdir() + "/data/wquotes.txt", mode='r', encoding="UTF8") as wquotes_file:
             wq = random.choice(wquotes_file.readlines()).strip()
             return wq.replace("―", "\n\t―").replace("\\n", "\n")
     except:
