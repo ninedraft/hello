@@ -20,5 +20,6 @@ setup(name='hello',
       },
       install_requires=[
           'requests',
+          'appdirs'
       ],
       zip_safe=True)
