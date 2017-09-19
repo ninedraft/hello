@@ -14,8 +14,10 @@ import random
 import time
 import sys
 from os import path
+import os
 
 import requests
+import appdirs
 
 if sys.version_info[0] < 3:
     raise Exception("Python 3 or a more recent version is required.")
@@ -47,6 +49,50 @@ cats = [
 ]
 
 
+def configuration_dir():
+    return appdirs.user_config_dir(appname="hello", appauthor=False)
+
+
+def location_by_ip():
+    ipinfo = requests.get("http://ipinfo.io/json", timeout=1.0)
+    region = ipinfo.json()["region"]
+    return region
+
+
+def location_by_timezone():
+    return time.tzname[0]
+
+
+def save_location(loc):
+    config_dir = configuration_dir()
+    os.makedirs(name=config_dir, exist_ok=True)
+    with open(config_dir + "/location", mode='w+', encoding="UTF8") as loc_file:
+        loc_file.write(str(loc))
+
+
+def location_from_file():
+    config = configuration_dir() + "/location"
+    if not path.isfile(config):
+        return None
+    with open(config, "r", encoding="UTF8") as loc:
+        loc = loc.readline().strip()
+        if len(loc) > 0:
+            return loc
+
+
+def pc_location():
+    locations = [
+        location_from_file(),
+        location_by_ip(),
+        location_by_timezone(),
+    ]
+    location = next(
+        (loc for loc in locations if loc is not None), "Tel-Aviv")
+    if not locations[0]:
+        save_location(location)
+    return location
+
+
 def rcat():
     return random.choice(cats)
 
@@ -63,7 +109,9 @@ def wquote():
 def weather():
     weath = ""
     try:
-        weath = requests.get("http://wttr.in/moscow?0", timeout=1.0).text
+        location = pc_location()
+        weath = requests.get("http://wttr.in/" +
+                             location + "?0", timeout=1.0).text
     except:
         return wquote()
     return weath
