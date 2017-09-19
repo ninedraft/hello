@@ -54,19 +54,15 @@ def configuration_dir():
 
 
 def location_from_file():
-    print("from_file")
     config = configuration_dir() + "/location"
-    if not path.isfile(config):
-        return None
-    with open(config, "r", encoding="UTF8") as loc:
-        try:
+    try:
+        with open(config, "r", encoding="UTF8") as loc:
             return loc.readline().strip() or None
-        except:
-            return None
+    except:
+        return None
 
 
 def location_by_ip():
-    print("from ip")
     try:
         ipinfo = requests.get("http://ipinfo.io/json", timeout=1.0)
         return ipinfo.json()["region"]
@@ -75,7 +71,6 @@ def location_by_ip():
 
 
 def location_by_timezone():
-    print("from time zone")
     return time.tzname[0]
 
 
