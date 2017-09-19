@@ -53,26 +53,8 @@ def configuration_dir():
     return appdirs.user_config_dir(appname="hello", appauthor=False)
 
 
-def location_by_ip():
-    try:
-        ipinfo = requests.get("http://ipinfo.io/json", timeout=1.0)
-        return ipinfo.json()["region"]
-    except:
-        return None
-
-
-def location_by_timezone():
-    return time.tzname[0]
-
-
-def save_location(loc):
-    config_dir = configuration_dir()
-    os.makedirs(name=config_dir, exist_ok=True)
-    with open(config_dir + "/location", mode='w+', encoding="UTF8") as loc_file:
-        loc_file.write(str(loc))
-
-
 def location_from_file():
+    print("from_file")
     config = configuration_dir() + "/location"
     if not path.isfile(config):
         return None
@@ -83,17 +65,33 @@ def location_from_file():
             return None
 
 
+def location_by_ip():
+    print("from ip")
+    try:
+        ipinfo = requests.get("http://ipinfo.io/json", timeout=1.0)
+        return ipinfo.json()["region"]
+    except:
+        return None
+
+
+def location_by_timezone():
+    print("from time zone")
+    return time.tzname[0]
+
+
+def save_location(loc):
+    config_dir = configuration_dir()
+    os.makedirs(name=config_dir, exist_ok=True)
+    with open(config_dir + "/location", mode='w+', encoding="UTF8") as loc_file:
+        loc_file.write(str(loc))
+
+
 def pc_location():
-    locations = [
-        location_from_file(),
-        location_by_ip(),
-        location_by_timezone(),
-    ]
-    location = next(
-        (loc for loc in locations if loc is not None), "Tel-Aviv")
-    if not locations[0]:
-        save_location(location)
-    return location
+    loc = location_from_file()
+    if not loc:
+        loc = location_by_ip() or location_by_timezone() or "Tel-Aviv"
+        save_location(loc)
+    return loc
 
 
 def rcat():
