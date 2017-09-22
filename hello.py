@@ -15,6 +15,7 @@ import time
 import sys
 from os import path
 import os
+import argparse
 
 import requests
 import appdirs
@@ -126,6 +127,14 @@ def splash():
 
 
 def main():
+    parser = argparse.ArgumentParser(description="A lovely welcome script")
+    parser.add_argument("--locate", action="store_const",
+                        const=True, default=False,
+                        help="locate this pc")
+    if parser.parse_args().locate:
+        loc = location_by_ip() or location_by_timezone() or "Tel-Aviv"
+        print("Location found: " + loc)
+        save_location(loc)
     random.seed(time.time())
     print(weather())
     print(rcat() + "\n")
