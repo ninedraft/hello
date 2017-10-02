@@ -24,30 +24,8 @@ if sys.version_info[0] < 3:
     raise Exception("Python 3 or a more recent version is required.")
 
 
-cats = [
-    '''      \\    /\\
-       )  ( ')
-      (  /  )
- jgs   \\(__)|''',
-    '''          |\\___/|
-          )     (             .              '
-         =\\     /=
-           )===(       *
-          /     \\
-          |     |
-         /       \\
-         \\       /
-  _/\\_/\\_/\\__  _/_/\\_/\\_/\\_/\\_/\\_/\\_/\\_/\\_/\\_
-  |  |  |  |( (  |  |  |  |  |  |  |  |  |  |
-  |  |  |  | ) ) |  |  |  |  |  |  |  |  |  |
-  |  |  |  |(_(  |  |  |  |  |  |  |  |  |  |
-  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-  jgs|  |  |  |  |  |  |  |  |  |  |  |  |  |
- ''',
-    '''  /\\_/\\
- ( o.o )
-  > ^ <'''
-]
+def scriptdir():
+    return path.dirname(path.realpath(__file__))
 
 
 def configuration_dir():
@@ -90,8 +68,14 @@ def pc_location():
     return loc
 
 
-def rcat():
-    return random.choice(cats)
+def ascii():
+    ascii_dir = scriptdir() + "/data/ascii"
+    files = [path.join(ascii_dir, file)
+             for file in os.listdir(ascii_dir)
+             if path.isfile(path.join(ascii_dir, file))]
+    ascii_file = random.choice(files)
+    with open(ascii_file, "r", encoding="UTF8") as ascii_art:
+        return ascii_art.read()
 
 
 def wquote():
@@ -137,7 +121,7 @@ def main():
         save_location(loc)
     random.seed(time.time())
     print(weather())
-    print(rcat() + "\n")
+    print(ascii() + "\n")
     print(splash())
 
 
