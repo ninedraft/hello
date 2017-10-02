@@ -70,10 +70,10 @@ def pc_location():
 
 def ascii():
     ascii_dir = scriptdir() + "/data/ascii"
-    files = [path.join(ascii_dir, file)
+    files = [file
              for file in os.listdir(ascii_dir)
              if path.isfile(path.join(ascii_dir, file))]
-    ascii_file = random.choice(files)
+    ascii_file = path.join(ascii_dir,  random.choice(files))
     with open(ascii_file, "r", encoding="UTF8") as ascii_art:
         return ascii_art.read()
 
